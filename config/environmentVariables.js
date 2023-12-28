@@ -10,6 +10,30 @@ const schema = {
     PORT: {
       type: 'number',
       default: 3000
+    },
+    DB_PORT: {
+      type: 'string',
+      default: 3306
+    },
+    DB_USER: {
+      type: 'string',
+      default: 'knex'
+    },
+    DB_PASSWORD: {
+      type: 'string',
+      default: 'secret'
+    },
+    DB_NAME: {
+      type: 'string',
+      default: 'knex'
+    },
+    DB_MIN_CONNECTIONS: {
+      type: 'number',
+      default: 0
+    },
+    DB_MAX_CONNECTIONS: {
+      type: 'number',
+      default: 30
     }
   }
 };

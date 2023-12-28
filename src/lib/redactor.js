@@ -5,9 +5,18 @@ const { isEmpty } = require('lodash');
 
 const REDACT = '****REDACTED****';
 
-const redactableKeys = [];
+const redactableKeys = [
+  'password',
+  'accessToken',
+  'authorization',
+  'newPassword',
+  'confirmNewPassword',
+  'confirmPassword',
+  'currentPassword',
+  'otp'
+];
 
-const maskableKeys = [];
+const maskableKeys = ['accessToken'];
 
 const shouldRedact = key => redactableKeys.includes(key);
 

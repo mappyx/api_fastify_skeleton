@@ -27,6 +27,16 @@ module.exports = function setupAllShutdownHandlers({ fastify }) {
     }
   }
 
+  async function closeDbConnection() {
+    logger.info({ message: 'Closing DB connection...' });
+    try {
+      await fastify.knex.destroy();
+      logger.info({ message: 'DB connection successfully closed!' });
+    } catch (err) {
+      logger.error({ message: 'SERVER_SHUTDOWN closeDbConnection', err });
+    }
+  }
+
   function setupShutdownHandlersFor(signal) {
     process.on(signal, async function onSigterm() {
       try {
@@ -34,6 +44,7 @@ module.exports = function setupAllShutdownHandlers({ fastify }) {
           message: `Got ${signal}. Graceful shutdown start ${new Date().toISOString()}`
         });
         await closeServer();
+        await closeDbConnection();
       } catch (err) {
         logger.error({
           message: 'SERVER_SHUTDOWN signalHandler Could not shutdown everything cleanly!',
