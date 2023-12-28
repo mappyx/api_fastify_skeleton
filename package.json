@@ -7,7 +7,8 @@
     "dev": "nodemon src | pino-pretty -c -t -l severity",
     "test": "echo \"Running tests... \n Done.\" && exit 0",
     "lint": "eslint . -c .eslintrc.json --ext js --fix",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "start": "node src"
   },
   "keywords": [],
   "author": "",
