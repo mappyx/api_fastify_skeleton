@@ -34,7 +34,23 @@ const schema = {
     DB_MAX_CONNECTIONS: {
       type: 'number',
       default: 30
-    }
+    },
+    REDIS_HOST: {
+      type: 'string',
+      default: '127.0.0.1'
+    },
+    REDIS_PORT: {
+      type: 'number',
+      default: 6379
+    },
+    REDIS_IP_FAMILY: {
+      type: 'number',
+      default: 4
+    },
+    REDIS_PASSWORD: {
+      type: 'string',
+      default: ''
+    },
   }
 };
 

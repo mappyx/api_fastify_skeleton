@@ -12,7 +12,7 @@ const lib = require('./lib');
 const routes = require('./app/routes');
 const { requestContext, onResponse, appendPayloadToResponse } = require('./hooks');
 const setupGracefulShutdown = require('./shutdown');
-
+const { redisClientRegister } = require('./lib/redis');
 const underPressureConfig = () => {
   return {
     healthCheck: async function () {
@@ -69,6 +69,7 @@ const init = async ({ config }) => {
     ignorePattern: /^(__tests__)/
   });
   app.register(routes);
+  redisClientRegister(app);
   app.addHook('preValidation', requestContext);
   app.addHook('preSerialization', appendPayloadToResponse);
   app.addHook('onResponse', onResponse);

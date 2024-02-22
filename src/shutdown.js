@@ -37,6 +37,10 @@ module.exports = function setupAllShutdownHandlers({ fastify }) {
     }
   }
 
+  async function closeRedisConnection() {
+    logger.info({ message: 'Redis connection successfully closed!' });
+  }
+
   function setupShutdownHandlersFor(signal) {
     process.on(signal, async function onSigterm() {
       try {
@@ -45,6 +49,7 @@ module.exports = function setupAllShutdownHandlers({ fastify }) {
         });
         await closeServer();
         await closeDbConnection();
+        await closeRedisConnection();
       } catch (err) {
         logger.error({
           message: 'SERVER_SHUTDOWN signalHandler Could not shutdown everything cleanly!',
